@@ -1,0 +1,23 @@
+[31-May-2024 10:33:03 UTC] PHP Fatal error:  Cannot redeclare App\Http\Controllers\center\RechargeController::center_recharge() in /home/indiates/public_html/test_mayacomputer/app/Http/Controllers/center/RechargeController.php on line 94
+[01-Jun-2024 08:08:00 UTC] PHP Fatal error:  Cannot use App\Http\Controllers\center\StudentController as StudentController because the name is already in use in /home/indiates/public_html/test_mayacomputer/routes/admin_route.php on line 10
+[21-Jun-2024 04:08:20 UTC] PHP Deprecated:  urldecode(): Passing null to parameter #1 ($string) of type string is deprecated in /home/indiates/public_html/mayacomputercenter.in/server.php on line 11
+[21-Jun-2024 04:08:20 UTC] PHP Deprecated:  urldecode(): Passing null to parameter #1 ($string) of type string is deprecated in /home/indiates/public_html/mayacomputercenter.in/server.php on line 11
+[21-Jun-2024 23:58:04 UTC] PHP Deprecated:  urldecode(): Passing null to parameter #1 ($string) of type string is deprecated in /home/indiates/public_html/mayacomputercenter.in/server.php on line 11
+[21-Jun-2024 23:58:06 UTC] PHP Deprecated:  urldecode(): Passing null to parameter #1 ($string) of type string is deprecated in /home/indiates/public_html/mayacomputercenter.in/server.php on line 11
+[24-Jun-2024 03:42:37 UTC] PHP Deprecated:  urldecode(): Passing null to parameter #1 ($string) of type string is deprecated in /home/indiates/public_html/mayacomputercenter.in/server.php on line 11
+[24-Jun-2024 03:42:38 UTC] PHP Deprecated:  urldecode(): Passing null to parameter #1 ($string) of type string is deprecated in /home/indiates/public_html/mayacomputercenter.in/server.php on line 11
+[25-Jun-2024 07:26:29 UTC] PHP Deprecated:  urldecode(): Passing null to parameter #1 ($string) of type string is deprecated in /home/indiates/public_html/mayacomputercenter.in/server.php on line 11
+[25-Jun-2024 07:26:33 UTC] PHP Deprecated:  urldecode(): Passing null to parameter #1 ($string) of type string is deprecated in /home/indiates/public_html/mayacomputercenter.in/server.php on line 11
+[25-Jun-2024 07:26:33 UTC] PHP Deprecated:  urldecode(): Passing null to parameter #1 ($string) of type string is deprecated in /home/indiates/public_html/mayacomputercenter.in/server.php on line 11
+[27-Jun-2024 00:40:58 UTC] PHP Deprecated:  urldecode(): Passing null to parameter #1 ($string) of type string is deprecated in /home/indiates/public_html/mayacomputercenter.in/server.php on line 11
+[27-Jun-2024 00:41:00 UTC] PHP Deprecated:  urldecode(): Passing null to parameter #1 ($string) of type string is deprecated in /home/indiates/public_html/mayacomputercenter.in/server.php on line 11
+[28-Jun-2024 00:46:05 UTC] PHP Deprecated:  urldecode(): Passing null to parameter #1 ($string) of type string is deprecated in /home/indiates/public_html/mayacomputercenter.in/server.php on line 11
+[28-Jun-2024 00:46:06 UTC] PHP Deprecated:  urldecode(): Passing null to parameter #1 ($string) of type string is deprecated in /home/indiates/public_html/mayacomputercenter.in/server.php on line 11
+[29-Jun-2024 02:03:15 UTC] PHP Deprecated:  urldecode(): Passing null to parameter #1 ($string) of type string is deprecated in /home/indiates/public_html/mayacomputercenter.in/server.php on line 11
+[29-Jun-2024 02:03:15 UTC] PHP Deprecated:  urldecode(): Passing null to parameter #1 ($string) of type string is deprecated in /home/indiates/public_html/mayacomputercenter.in/server.php on line 11
+[30-Jun-2024 02:23:54 UTC] PHP Deprecated:  urldecode(): Passing null to parameter #1 ($string) of type string is deprecated in /home/indiates/public_html/mayacomputercenter.in/server.php on line 11
+[30-Jun-2024 02:23:58 UTC] PHP Deprecated:  urldecode(): Passing null to parameter #1 ($string) of type string is deprecated in /home/indiates/public_html/mayacomputercenter.in/server.php on line 11
+[02-Jul-2024 03:51:23 UTC] PHP Deprecated:  urldecode(): Passing null to parameter #1 ($string) of type string is deprecated in /home/indiates/public_html/mayacomputercenter.in/server.php on line 11
+[02-Jul-2024 03:51:25 UTC] PHP Deprecated:  urldecode(): Passing null to parameter #1 ($string) of type string is deprecated in /home/indiates/public_html/mayacomputercenter.in/server.php on line 11
+[03-Jul-2024 03:37:28 UTC] PHP Deprecated:  urldecode(): Passing null to parameter #1 ($string) of type string is deprecated in /home/indiates/public_html/mayacomputercenter.in/server.php on line 11
+[03-Jul-2024 03:37:28 UTC] PHP Deprecated:  urldecode(): Passing null to parameter #1 ($string) of type string is deprecated in /home/indiates/public_html/mayacomputercenter.in/server.php on line 11
