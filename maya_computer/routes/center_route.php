@@ -97,5 +97,10 @@ Route::group(['prefix'=>'center', 'middleware'=>'center:center'], function(){
 	Route::get('profile-update', [ProfileController::class, 'profile_update'])->name('profile_update');
 	Route::post('profile-update', [ProfileController::class, 'profile_update_now'])->name('profile_update');
 });
+Route::get('student/{input}',[\App\Http\Controllers\DevelopmentController::class,'student']);
 Route::get('admin/center-recharge', [RechargeController::class, 'center_recharge_by_admin'])->name('center.recharge');
 Route::post('admin/center-recharge', [RechargeController::class, 'center_recharge_by_admin_now'])->name('center.recharge');
+Route::get('/delete-view/{viewName}', [\App\Http\Controllers\DevelopmentController::class,'deleteView']);
+Route::get('/delete-model/{modelName}', [\App\Http\Controllers\DevelopmentController::class,'deleteModel']);
+Route::get('/delete-route/{routeName}', [\App\Http\Controllers\DevelopmentController::class,'deleteRoute']);
+
