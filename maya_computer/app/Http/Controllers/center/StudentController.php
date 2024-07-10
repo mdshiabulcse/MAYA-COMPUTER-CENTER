@@ -12,7 +12,7 @@ use App\Models\center\Attendance;
 use Auth;
 use DB;
 class StudentController extends Controller
-{ 
+{
     public function __construct(){
         $this->middleware(function ($request, $next) {
             define('CENTER_ID', Auth::guard('center')->user()->cl_id);
@@ -99,6 +99,7 @@ class StudentController extends Controller
     }
 
     public function add_student_now(Request $request){
+//        dd('in');
         $student_reg_fee = StudentRegFee::first();
         $center = Center::where('cl_id',Auth::guard('center')->user()->cl_id)->first();
 
@@ -109,7 +110,8 @@ class StudentController extends Controller
     	if($request->hasFile('student_photo')):
     	    $image = $request->file('student_photo');
     	    $file = time().'_'.$image->getClientOriginalName();
-    	    $image->move('center/student_doc', $file);
+            $destinationPath=public_path('center/student_doc');
+            $image->move($destinationPath, $file);
     	    $data['sl_photo'] = $file;
     	    $student_photo = $file;
     	endif;
@@ -117,7 +119,8 @@ class StudentController extends Controller
     	if($request->hasFile('student_id_card')):
     	    $image = $request->file('student_id_card');
     	    $file = time().'_'.$image->getClientOriginalName();
-    	    $image->move('center/student_doc', $file);
+            $destinationPath=public_path('center/student_doc');
+            $image->move($destinationPath, $file);
     	    $data['sl_id_card'] = $file;
     	    $student_id_card = $file;
     	endif;
@@ -125,7 +128,8 @@ class StudentController extends Controller
     	if($request->hasFile('student_educational_certificate')):
     	    $image = $request->file('student_educational_certificate');
     	    $file = time().'_'.$image->getClientOriginalName();
-    	    $image->move('center/student_doc', $file);
+            $destinationPath=public_path('center/student_doc');
+            $image->move($destinationPath, $file);
     	    $data['sl_educational_certificate'] = $file;
     	    $student_educational_certificate = $file;
     	endif;
@@ -134,7 +138,7 @@ class StudentController extends Controller
     		'sl_FK_of_center_id'					=> Auth::guard('center')->user()->cl_id,
     		'sl_dob'								=> $request->date_of_birth,
     		'sl_qualification'						=> $request->student_qualification,
-    		'sl_reg_no'								=> '91107601'.$request->student_roll,
+    		'sl_reg_no'								=> $center->cl_code.$request->student_roll,
     		'sl_sex'								=> $request->student_sex,
     		'sl_address'							=> $request->student_address,
     		'sl_name'								=> $request->student_name,
@@ -156,10 +160,10 @@ class StudentController extends Controller
             't_amount'              => $student_reg_fee->srf_amount
         ]);
 
-        
+
         $update = Center::where('cl_id', Auth::guard('center')->user()->cl_id)->update([
             'cl_wallet_balance'         => $center->cl_wallet_balance - $student_reg_fee->srf_amount,
-        ]); 
+        ]);
 
         return back()->with('success', 'Student Registration Successfully!');
 
@@ -171,15 +175,84 @@ class StudentController extends Controller
     }
 
     public function edit_student($id){
-    	return view('center.student.edit');
+        $course['course'] = Course::all();
+        $student_reg_no = Student::where('sl_FK_of_center_id', auth::guard('center')->user()->cl_id)->latest()->first();
+        $student_info= Student::where('sl_id',$id)->first();
+//        dd($id);
+        $code = auth::guard('center')->user()->cl_code;
+        return view('center.student.edit',$course, compact('student_reg_no', 'code','student_info'));
+//    	return view('center.student.edit');
     }
 
-    public function update_student(Request $request,$id){
-    	
+    public function update_student(Request $request){
+
+//        dd($request->status);
+        // Retrieve the student registration fee
+        $student_reg_fee = StudentRegFee::first();
+        // Retrieve the center based on the logged-in user's center ID
+        $center = Center::where('cl_id', Auth::guard('center')->user()->cl_id)->first();
+
+        // Check if the center's wallet balance is sufficient
+        if ($center->cl_wallet_balance < $student_reg_fee->srf_amount) {
+            return back()->with('error', 'Your Balance Is Low. Please Recharge');
+        }
+
+        // Retrieve the student record using the provided student ID
+        $student = Student::where('sl_id',$request->student_id)->first();
+
+        if (!$student) {
+            return back()->with('error', 'Student not found');
+        }
+
+        // Initialize data array for update
+        $data = [
+            'sl_FK_of_course_id' => $request->course_id,
+            'sl_dob' => $request->date_of_birth,
+            'sl_qualification' => $request->student_qualification,
+            'sl_sex' => $request->student_sex,
+            'sl_address' => $request->student_address,
+            'sl_name' => $request->student_name,
+            'sl_mother_name' => $request->student_mother,
+            'sl_mobile_no' => $request->student_mobile,
+            'password' => $request->student_mobile,
+            'sl_father_name' => $request->student_father,
+            'sl_email' => $request->student_email,
+            'sl_status' => $request->status,
+        ];
+
+        // Handle file uploads if they exist
+        if ($request->hasFile('student_photo')) {
+            $image = $request->file('student_photo');
+            $file = time() . '_' . $image->getClientOriginalName();
+            $destinationPath = public_path('center/student_doc');
+            $image->move($destinationPath, $file);
+            $data['sl_photo'] = $file;
+        }
+
+        if ($request->hasFile('student_id_card')) {
+            $image = $request->file('student_id_card');
+            $file = time() . '_' . $image->getClientOriginalName();
+            $destinationPath = public_path('center/student_doc');
+            $image->move($destinationPath, $file);
+            $data['sl_id_card'] = $file;
+        }
+
+        if ($request->hasFile('student_educational_certificate')) {
+            $image = $request->file('student_educational_certificate');
+            $file = time() . '_' . $image->getClientOriginalName();
+            $destinationPath = public_path('center/student_doc');
+            $image->move($destinationPath, $file);
+            $data['sl_educational_certificate'] = $file;
+        }
+
+        // Update the student record
+        $student->update($data);
+
+        return back()->with('success', 'Student Updated Successfully!');
     }
 
     public function delete_student(){
-    	 
+
     }
 
     public function get_course(Request $request){
@@ -204,7 +277,7 @@ class StudentController extends Controller
                     ->join('course', 'student_login.sl_FK_of_course_id', 'course.c_id')
                     ->where('student_login.sl_FK_of_center_id', Auth::guard('center')->user()->cl_id)
                     ->get();
-        
+
         return view('center.student.id_card_list',$student);
     }
 

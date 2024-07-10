@@ -2,7 +2,7 @@
 @section('title', 'Pending Student List')
 @push('custom-css')
 	<style type="text/css">
-		
+
 	</style>
 @endpush
 @section('content')
@@ -15,7 +15,7 @@
 						<a href="{{ route('add_student') }}">  <button class="btn btn-success btn-sm" > Add New Student</button></a>
 				</div>
 			<div class="card-body">
-				<div class="card-body">{{-- 
+				<div class="card-body">{{--
 					<form method="get" action="{{ route('admission.list') }}">
 						<div class="row">
 							<div class="col-lg-3">
@@ -31,7 +31,7 @@
 								<button style="margin-top: 26px; "class="btn btn-primary">Filter&nbsp;<i class="fa-solid fa-filter"></i></button>
 								<a href="{{ route('admission.list') }}" style="margin-top: 26px; "class="btn btn-danger">Reset&nbsp;<i class="fa-solid fa-ban"></i></a>
 							</div>
-						</div>	
+						</div>
 					</form> --}}
 				    <table id="datatable-buttons" class="table table-bordered table-sm table-striped w-100">
 				        <thead>
@@ -43,11 +43,12 @@
 					            <th>Course</th>
 					            <th>Status</th>
 					            <th>Image</th>
+					            <th>Action</th>
 					        </tr>
 				        </thead>
 				        <tbody>
 				        	@php $i=1; @endphp
-				        	@foreach($student as $data) 
+				        	@foreach($student as $data)
 				        		<tr>
 				        			<td>{{ $data->cl_code }}</td>
 				        			<td>{{ $data->sl_reg_no }}</td>
@@ -60,7 +61,9 @@
 				        			<td>
 				        				<img style="width: 47px;" src="{{ asset('center/student_doc/').'/'.$data->sl_photo }}">
 				        			</td>
-				        			
+                                    <td>
+                                        <a href="{{ route('edit_student', $data->sl_id) }}" class="btn btn-primary btn-sm"><i class="fa-regular fa-edit"></i></a>
+                                    </td>
 				        		</tr>
 				        	@endforeach
 				        </tbody>

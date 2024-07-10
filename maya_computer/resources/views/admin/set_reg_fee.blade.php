@@ -39,7 +39,15 @@
 						<div class="col-lg-12 mb-2">
 							<div class="form-group">
 								<label>Amount</label>
-								<input required="" type="text" value="{{ $student_reg_fee->srf_amount }}" class="form-control" name="amount" placeholder="Amount">
+
+                                <select class="form-select" name='amount' required>
+                                    <option value='' selected></option>
+                                    @foreach($student_reg_fee as $value)
+                                        <option  value='{{$value->c_price}}' >{{$value->c_price}}</option>
+                                    @endforeach
+
+                                </select>
+{{--								<input required="" type="text" value="{{ $student_reg_fee->srf_amount }}" class="form-control" name="amount" placeholder="Amount">--}}
 							</div>
 						</div>
 						<div class="col-lg-3 "></div>
@@ -56,6 +64,6 @@
 @endsection
 @push('custom-js')
 	<script type="text/javascript">
-		
+
 	</script>
 @endpush

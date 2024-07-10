@@ -2,7 +2,7 @@
 @section('title', 'Verified Student List')
 @push('custom-css')
 <style type="text/css">
-	
+
 </style>
 @endpush
 @section('content')
@@ -54,6 +54,7 @@
 									<th>Course</th>
 									<th>Status</th>
 									<th>Image</th>
+									<th>Action</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -72,7 +73,9 @@
 									<td>
 										<img style="width: 47px;" src="{{ asset('center/student_doc/').'/'.$data->sl_photo }}">
 									</td>
-									
+                                    <td>
+                                        <a href="{{ route('edit_student', $data->sl_id) }}" class="btn btn-primary btn-sm"><i class="fa-regular fa-edit"></i></a>
+                                    </td>
 								</tr>
 								@endforeach
 							</tbody>
@@ -88,13 +91,13 @@
 			function select_all_student(){
 				var checkbox = document.getElementById('selectAllCheckbox');
 		        var isChecked = checkbox.checked;
-		        
+
 		        var ids = [];
 		        $('#datatable-buttons tbody tr').each(function() {
-		            var id = $(this).find('td:first').text(); 
+		            var id = $(this).find('td:first').text();
 		            ids.push(id);
 		        });
-		        
+
 		        if (isChecked) {
 		            return ids;
 		        } else {
@@ -112,10 +115,10 @@
 			    	data:{student_id:student_id,batch_id:batch_id},
 			    	dataType: "json",
 			    	success: function(response){
-			    		
+
 			    	}
 			    });
-			    
+
 			}
 		</script>
 	@endpush

@@ -23,7 +23,7 @@ class StudentController extends Controller
     public function add_student(){
         $center   = Center::where('cl_code', '!=', '61123000')->get();
         $course = Course::all();
-       
+
 
     	return view('admin.student.create',['center'=>$center,'course'=>$course]);
     }
@@ -39,7 +39,8 @@ class StudentController extends Controller
     	if($request->hasFile('student_photo')):
     	    $image = $request->file('student_photo');
     	    $file = time().'_'.$image->getClientOriginalName();
-    	    $image->move('center/student_doc', $file);
+            $destinationPath=public_path('center/student_doc');
+    	    $image->move($destinationPath, $file);
     	    $data['sl_photo'] = $file;
     	    $student_photo = $file;
     	endif;
@@ -47,7 +48,8 @@ class StudentController extends Controller
     	if($request->hasFile('student_id_card')):
     	    $image = $request->file('student_id_card');
     	    $file = time().'_'.$image->getClientOriginalName();
-    	    $image->move('center/student_doc', $file);
+            $destinationPath=public_path('center/student_doc');
+            $image->move($destinationPath, $file);
     	    $data['sl_id_card'] = $file;
     	    $student_id_card = $file;
     	endif;
@@ -55,7 +57,8 @@ class StudentController extends Controller
     	if($request->hasFile('student_educational_certificate')):
     	    $image = $request->file('student_educational_certificate');
     	    $file = time().'_'.$image->getClientOriginalName();
-    	    $image->move('center/student_doc', $file);
+            $destinationPath=public_path('center/student_doc');
+            $image->move($destinationPath, $file);
     	    $data['sl_educational_certificate'] = $file;
     	    $student_educational_certificate = $file;
     	endif;
@@ -86,10 +89,10 @@ class StudentController extends Controller
             't_amount'              => $student_reg_fee->srf_amount
         ]);
 
-        
+
         $update = Center::where('cl_id', Auth::guard('center')->user()->cl_id)->update([
             'cl_wallet_balance'         => $center->cl_wallet_balance - $student_reg_fee->srf_amount,
-        ]); 
+        ]);
 
         return back()->with('success', 'Student Registration Successfully!');
 
@@ -99,8 +102,8 @@ class StudentController extends Controller
     	// 	return back()->with('error', 'Something Went Wrong!');
     	// endif;
     }
-    
-    
+
+
     public function get_reg_no(Request $request){
         $student_reg = Student::where('sl_FK_of_center_id', $request->center_id)->first();
         if($student_reg):
@@ -115,20 +118,20 @@ class StudentController extends Controller
                 'status'    => 0
             ];
         endif;
-        
+
         return response()->json($data);
     }
 
     public function edit_student(){
-    	
+
     }
 
     public function update_student(){
-    	
+
     }
 
     public function delete_student(){
-    	
+
     }
 
     public function student_status_updated(Request $request){
@@ -160,18 +163,19 @@ class StudentController extends Controller
     }
 
     public function set_reg_fee(){
-        $student_reg_fee = StudentRegFee::first();
+        $student_reg_fee = Course::get();
+//        dd($student_reg_fee);
         return view('admin.set_reg_fee', compact('student_reg_fee'));
     }
 
     public function update_reg_fee(Request $request){
         $student_reg_fee = StudentRegFee::first();
 
-        $update = StudentRegFee::where('srf_id',$student_reg_fee->srf_id)->update([ 
+        $update = StudentRegFee::where('srf_id',$student_reg_fee->srf_id)->update([
             'srf_amount'        => $request->amount
 
         ]);
 
         return back()->with('success', 'Registration Fees Updated Successfully!');
     }
-} 
+}

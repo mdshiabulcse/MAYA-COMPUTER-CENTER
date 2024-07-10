@@ -34,7 +34,7 @@ Route::group(['prefix'=>'center', 'middleware'=>'center:center'], function(){
 	Route::get('add-student', [StudentController::class, 'add_student'])->name('add_student');
 	Route::post('add-student', [StudentController::class, 'add_student_now'])->name('add_student');
 	Route::get('edit-student/edit/{id}', [StudentController::class, 'edit_student'])->name('edit_student');
-	Route::post('edit-student/{id}', [StudentController::class, 'update_student'])->name('edit_student');
+	Route::post('edit-student-update', [StudentController::class, 'update_student'])->name('update_student');
 	Route::get('delete-student/{id}', [StudentController::class, 'delete_student'])->name('delete_student');
 	Route::get('get-course', [StudentController::class, 'get_course'])->name('get_course');
 	Route::get('pending-student-list', [StudentController::class, 'pending_student'])->name('pending_student');
